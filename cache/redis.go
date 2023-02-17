@@ -1,14 +1,13 @@
 package cache
 
 import (
-	"context"
 	"time"
 
 	"github.com/redis/go-redis/v9"
 )
 
 func init() {
-	InitRedisClient(RedisCacheConfig{
+	initRedisClient(RedisCacheConfig{
 		Host: "localhost:6379",
 		Db: 0,
 		Exp: 1,
@@ -17,15 +16,13 @@ func init() {
 
 var redisClient *redis.Client
 
-var ctx = context.Background()
-
 type RedisCacheConfig struct {
 	Host string
 	Db int
 	Exp time.Duration
 }
 
-func InitRedisClient(config RedisCacheConfig) {
+func initRedisClient(config RedisCacheConfig) {
 	redisClient = redis.NewClient(&redis.Options{
 		Addr: config.Host,
 		DB: config.Db,
@@ -33,6 +30,6 @@ func InitRedisClient(config RedisCacheConfig) {
 	})
 }
 
-func GetRedisClient() (*redis.Client, context.Context) {
-	return redisClient, ctx
+func GetRedisClient() (*redis.Client) {
+	return redisClient
 }

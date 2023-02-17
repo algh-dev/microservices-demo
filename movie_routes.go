@@ -11,9 +11,8 @@ import (
 
 
 func SetupMoviesRoutes(route *gin.Engine) {
-	redisClient, ctx := cache.GetRedisClient()
 
-	repository := repository.NewMovieRepository(redisClient, ctx)
+	repository := repository.NewMovieRepository()
 
 
 	route.POST("/movies", func(ctx *gin.Context) {

@@ -15,10 +15,12 @@ type MovieRepository struct {
 	ctx context.Context
 }
 
-func NewMovieRepository(client *redis.Client, ctx context.Context) MovieRepository {
+func NewMovieRepository() MovieRepository {
+	redisClient := cache.GetRedisClient()
+
 	return MovieRepository{
-		client: client,
-		ctx: ctx,
+		client: redisClient,
+		ctx: context.Background(),
 	}
 }
 
