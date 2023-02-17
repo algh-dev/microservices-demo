@@ -54,4 +54,7 @@ func SetupRoutes(route *gin.Engine) {
 	route.GET("/jsonp", func(ctx *gin.Context) {
 		ctx.JSONP(http.StatusOK, gin.H{"foo": "bar"})
 	})
+
+	//movies endpoints
+	SetupMoviesRoutes(route)
 }

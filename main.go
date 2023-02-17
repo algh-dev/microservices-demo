@@ -23,12 +23,7 @@ type UriParam struct {
 }
 
 func main() {
-	//write logs to a file
-	f, _ := os.Create("gin.log")
-	mw := io.MultiWriter(f, os.Stdout)
-	gin.DefaultWriter = mw
-
-	log.SetOutput(mw)
+	setupLog()
 
 	route := gin.Default()
 
@@ -41,4 +36,13 @@ func main() {
 	SetupRoutes(route)
 
 	route.Run()
+}
+
+func setupLog() {
+	//write logs to a file & stdout
+	f, _ := os.Create("gin.log")
+	mw := io.MultiWriter(f, os.Stdout)
+	gin.DefaultWriter = mw
+
+	log.SetOutput(mw)
 }
